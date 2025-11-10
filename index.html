@@ -1,106 +1,30 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My e-Portfolio для Assessment</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-Portfolio</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>My e-Portfolio</h1>
-    <nav>
-      <ul>
-        <li><a href="#" onclick="showPage('home')">Головна</a></li>
-        <li><a href="#" onclick="showPage('task1')">Завдання 1</a></li>
-        <li><a href="#" onclick="showPage('task2')">Завдання 2</a></li>
-        <li><a href="#" onclick="showPage('task3')">Завдання 3</a></li>
-        <li><a href="#" onclick="showPage('task4')">Завдання 4</a></li>
-        <li><a href="#" onclick="showPage('overview')">Огляд платформи</a></li>
-      </ul>
-    </nav>
+  <header class="gh-header">
+    <div class="gh-header-inner">
+      <span class="gh-logo" id="home-link">E-Portfolio</span>
+      <nav>
+        <a href="#home" id="navHome">Home</a>
+        <a href="#task1" id="nav1">Task 1</a>
+        <a href="#task2" id="nav2">Task 2</a>
+        <a href="#task3" id="nav3">Task 3</a>
+        <a href="#task4" id="nav4">Task 4</a>
+      </nav>
+    </div>
   </header>
-
   <main>
-    <section id="home" class="page">
-      <h2>Вітаю!</h2>
-      <p>Я – Євгеній Кравченко, студент групи LDE. Цей сайт створено для демонстрації моїх виконаних робіт у рамках assessment е-portfolio. Ви можете знайти мої відповіді на завдання, приклади робіт та інформацію про обрану платформу.</p>
-    </section>
-
-    <section id="task1" class="page" style="display:none">
-      <h2>Завдання 1: Аналіз технологічних трендів</h2>
-      <div class="answer-block">
-        <p><b>Завдання:</b> Проаналізуйте сучасні технологічні тренди в розробці програмного забезпечення.</p>
-        <p><b>Відповідь:</b><br>
-          Останніми роками найбільше впливають на розробку такі тренди: хмарні технології (Cloud), гнучка розробка (Agile), DevOps, розповсюдження мобільних платформ, автоматизація CI/CD та увага до безпеки. Я визначив для себе важливість вивчення роботи з Docker та Kubernetes, оскільки сучасні компанії активно використовують контейнеризацію. Також слідкував за трендами в AI, але для даного assessment AI не використовував.
-        </p>
-        <img src="screenshot1.png" alt="Скріншот Завдання 1" class="img-task">
-      </div>
-    </section>
-
-    <section id="task2" class="page" style="display:none">
-      <h2>Завдання 2: Візуалізація (Mind-map та постер)</h2>
-      <div class="answer-block">
-        <p><b>Mind-map:</b> Основні етапи побудови сучасного e-portfolio для розробника.</p>
-        <img src="mindmap.png" alt="Mind Map" class="img-task">
-        <br>
-        <a href="https://drive.google.com/your_mindmap_link" target="_blank">Оригінал Mind-map (Google Drive)</a>
-      </div>
-      <div class="answer-block">
-        <p><b>Постер:</b> Як виглядає професійний розробник у 2025 році?</p>
-        <img src="poster.png" alt="Постер" class="img-task">
-        <br>
-        <a href="https://drive.google.com/your_poster_link" target="_blank">Оригінал постера (Google Drive)</a>
-      </div>
-    </section>
-
-    <section id="task3" class="page" style="display:none">
-      <h2>Завдання 3: Реальний кейс з розробки</h2>
-      <div class="answer-block">
-        <p><b>Завдання:</b> Опишіть кейс, де ви застосовували сучасний стек технологій.</p>
-        <p><b>Відповідь:</b><br>
-          Під час навчального проєкту я створював веб-сайт з використанням HTML, CSS, JavaScript та фреймворку React. Я застосовував Git для контролю версій, працював у команді через GitHub, що дозволило швидко виявити та виправити помилки. Для деплойменту обрали Netlify, а для дизайну — Figma. Такий підхід допоміг виконати завдання у визначений термін й чітко розподілити ролі.
-        </p>
-        <img src="screenshot3.png" alt="Скріншот Завдання 3" class="img-task">
-      </div>
-    </section>
-
-    <section id="task4" class="page" style="display:none">
-      <h2>Завдання 4: Саморефлексія та оцінка процесу</h2>
-      <div class="answer-block">
-        <p><b>Завдання:</b> Самоаналіз: що вдалося, а що варто покращити?</p>
-        <p><b>Відповідь:</b><br>
-          Я навчився краще структурувати власну роботу, чітко планувати виконання, шукати інформацію і взаємодіяти із онлайн-інструментами. Вдалося підвищити навички у пошуку рішень для нетипових задач. Ще треба покращити тайм-менеджмент на етапі детального планування завдання. Також планую довчити більш глибоко основи безпеки вебу.
-        </p>
-        <img src="screenshot4.png" alt="Скріншот Завдання 4" class="img-task">
-      </div>
-    </section>
-
-    <section id="overview" class="page" style="display:none">
-      <h2>Ілюстративний огляд інструменту</h2>
-      <p><strong>Використана платформа:</strong> Я створював портфоліо як статичний сайт (HTML, CSS, JS), щоб мати максимальний контроль, незалежність та відповідність усім вимогам assessment.</p>
-      <ul>
-        <li>Створив структуру сайту, згідно з умовами (головна, 4 завдання, огляд)</li>
-        <li>Інтегрував всі відповіді, ілюстрації, скріншоти та лінки</li>
-        <li>Забезпечив легкий доступ (скріншоти, посилання відкриті для викладача)</li>
-        <li>Перевірив роботу у приватному режимі</li>
-      </ul>
-      <p><strong>Кроки створення:</strong></p>
-      <ol>
-        <li>Планування структури е-portfolio</li>
-        <li>Виконання завдань, підготовка ілюстрацій та файлів</li>
-        <li>Верстка у HTML+CSS+JS</li>
-        <li>Тестування доступу та перевірка посилань</li>
-        <li>Здача Word-документу з усіма скріншотами</li>
-      </ol>
-      <p><b>Рекомендується перевіряти всі посилання в Incognito-режимі!</b></p>
-    </section>
+    <div id="app"></div>
   </main>
-
-  <footer>
-    <p>&copy; 2025 Євгеній Кравченко</p>
+  <footer class="gh-footer">
+    <p>&copy; 2025 Yaroslav Tsyrul</p>
   </footer>
-
-  <script src="script.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
