@@ -204,3 +204,67 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1em;}
 }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+
+
+.task-previews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 32px 0;
+}
+.preview-card {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  background: #f7f7fa;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #24292f10;
+  text-decoration: none;
+  transition: box-shadow .18s, background .18s;
+  padding: 14px;
+  cursor: pointer;
+  border: 1px solid #d0d7de;
+  position: relative;
+  min-height: 140px;
+}
+.preview-card:hover, .preview-card:focus {
+  background: #fff;
+  box-shadow: 0 6px 20px #24292f22;
+}
+
+.preview-card-imgWrap {
+  flex: 0 0 188px;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #eaeaf0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-card-img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.preview-card-content {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.preview-fragment {
+  color: #333;
+  margin-top: 10px;
+  font-size: 1rem;
+  line-height: 1.4;
+  min-height: 56px;
+  max-height: 66px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

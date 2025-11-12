@@ -87,3 +87,27 @@ function toggleCard(header) {
   if(card.classList.contains('collapsed')) btn.textContent = '+';
   else btn.textContent = '−';
 }
+
+function showPreview(taskName) {
+  // Вставляє «preview» з TaskX.html у Home
+  const fragmentId = "preview-" + taskName;
+  const fragmentEl = document.getElementById(fragmentId);
+  if(!fragmentEl) return;
+
+  // Витягуємо перший абзац/заголовок з tasks[taskName]
+  let htmlFrag = '';
+  try {
+    const temp = document.createElement('div');
+    temp.innerHTML = tasks[taskName] || '';
+    // Витягнути перший абзац і заголовок (або кастомізуй тут!)
+    const h1 = temp.querySelector('h1');
+    const p = temp.querySelector('p');
+    htmlFrag = '';
+    if(h1) htmlFrag += '<b>'+h1.textContent+'</b><br>';
+    if(p) htmlFrag += p.textContent;
+  } catch(e) {}
+  fragmentEl.innerHTML = htmlFrag ? htmlFrag : 'Preview unavailable';
+
+  // SPA: перейди на taskX
+  location.hash = '#' + taskName;
+}
