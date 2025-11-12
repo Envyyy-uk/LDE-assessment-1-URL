@@ -130,3 +130,77 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1em;}
   .gh-logo { font-size: 1.07rem; }
   .gh-footer { font-size: 0.97rem; padding: 12px 0 8px 0; }
 }
+.pdf-button {
+  display: inline-block;
+  background: #ff0000;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px #0074D940;
+  transition: background .15s;
+  margin-bottom: 22px;
+  margin-top: 8px;
+  font-size: 1rem;
+  border: none;
+}
+.pdf-button:hover, .pdf-button:focus {
+  background: #00ff1a;
+  color: #fff;
+  text-decoration: underline;
+}
+.task-card1 {
+  background: #ffffff;
+  border: 1px solid #000000;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px #24292f09;
+  padding: 32px;
+  margin-bottom: 15px;
+  margin-top: 0%;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  padding: 22px 32px 0 32px;
+  cursor: pointer;
+  ;
+}
+
+.card-header h1,
+.card-header h2,
+.card-header h3 {
+  margin: 0;
+  font-size: 1.12em;
+}
+
+.collapse-btn {
+  background: #0074D9;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px; height: 32px;
+  font-size: 1.3em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background .17s;
+}
+.collapse-btn:hover {
+  background: #005fa3;
+}
+.card-content {
+  padding: 0 32px 22px 32px;
+  animation: fadeIn .35s;
+}
+
+.task-card1.collapsed .card-content {
+  display: none;
+}
+
+.task-card1.collapsed .collapse-btn {
+  transform: rotate(180deg);
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

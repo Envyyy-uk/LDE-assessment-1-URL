@@ -41,7 +41,7 @@ window.addEventListener("hashchange", function() {
     if (ref) {
       ref.classList.add("ref-highlight");
       ref.scrollIntoView({ behavior: "smooth", block: "center" });
-      setTimeout(() => ref.classList.remove("ref-highlight"), 2000);
+      setTimeout(() => ref.classList.remove("ref-highlight"), 150000);
     }
     return;
   }
@@ -78,4 +78,12 @@ function activateReferenceLinks() {
     const ref = document.getElementById(refId);
     if(ref) ref.classList.remove('ref-highlight');
   }
+}
+function toggleCard(header) {
+  const card = header.parentElement;
+  card.classList.toggle("collapsed");
+  // міняй текст/іконку кнопки (− ↔ +)
+  const btn = header.querySelector('.collapse-btn');
+  if(card.classList.contains('collapsed')) btn.textContent = '+';
+  else btn.textContent = '−';
 }
