@@ -1,4 +1,5 @@
-// SPA logic for 4 tasks + Home + reference highlight
+// SPA logic for 4 tasks + Home + reference highlight (final)
+// (unchanged — keeps behavior the same)
 
 const tasks = {
   "home": "",
@@ -8,7 +9,7 @@ const tasks = {
   "task4": ""
 };
 
-// Підтягуємо всі HTML сторінки
+// Load all pages
 fetch("Home.html").then(r=>r.text()).then(html=>{ tasks.home = html; if(getPage()==="home") renderTask("home"); });
 fetch("Task1.html").then(r=>r.text()).then(html=>{ tasks.task1 = html; if(getPage()==="task1") renderTask("task1"); });
 fetch("Task2.html").then(r=>r.text()).then(html=>{ tasks.task2 = html; if(getPage()==="task2") renderTask("task2"); });
@@ -25,34 +26,37 @@ function renderTask(page) {
   ["navHome","nav1","nav2","nav3","nav4"].forEach(id=>{
     const el = document.getElementById(id); if(el) el.classList.remove("active");
   });
-  if(page==="home") document.getElementById("navHome").classList.add("active");
-  if(page==="task1") document.getElementById("nav1").classList.add("active");
-  if(page==="task2") document.getElementById("nav2").classList.add("active");
-  if(page==="task3") document.getElementById("nav3").classList.add("active");
-  if(page==="task4") document.getElementById("nav4").classList.add("active");
+  if(page==="home") document.getElementById("navHome")?.classList.add("active");
+  if(page==="task1") document.getElementById("nav1")?.classList.add("active");
+  if(page==="task2") document.getElementById("nav2")?.classList.add("active");
+  if(page==="task3") document.getElementById("nav3")?.classList.add("active");
+  if(page==="task4") document.getElementById("nav4")?.classList.add("active");
   activateReferenceLinks();
 }
 
-// SPA: при зміні хешу
+// Hash change handler
 window.addEventListener("hashchange", function() {
   const hash = location.hash.replace("#", "");
   if (hash.startsWith('ref')) {
     const ref = document.getElementById(hash);
     if (ref) {
+      openParentCardIfClosed(ref);
       ref.classList.add("ref-highlight");
       ref.scrollIntoView({ behavior: "smooth", block: "center" });
-      setTimeout(() => ref.classList.remove("ref-highlight"), 150000);
+      setTimeout(() => ref.classList.remove("ref-highlight"), 5000);
     }
     return;
   }
   renderTask(getPage());
 });
-// Initial load
+
+// Initial render
 renderTask(getPage());
-// Home по кліку лого
+
+// Home logo -> home (anchor still works because id="home-link" used)
 document.getElementById("home-link").onclick = function() { location.hash = "#home"; };
 
-// Reference highlight
+// Reference highlight handlers
 function activateReferenceLinks() {
   document.querySelectorAll('.ref-link').forEach(link => {
     link.addEventListener('mouseenter', highlightReference);
@@ -61,13 +65,15 @@ function activateReferenceLinks() {
       const refId = (this.getAttribute('href') || '').replace('#', '');
       const ref = document.getElementById(refId);
       if (ref) {
+        openParentCardIfClosed(ref);
         ref.classList.add('ref-highlight');
         ref.scrollIntoView({ behavior: "smooth", block: "center" });
-        setTimeout(() => ref.classList.remove('ref-highlight'), 2000);
+        setTimeout(() => ref.classList.remove('ref-highlight'), 5000);
         e.preventDefault();
       }
     });
   });
+
   function highlightReference() {
     const refId = (this.getAttribute('href') || '').replace('#', '');
     const ref = document.getElementById(refId);
@@ -79,35 +85,83 @@ function activateReferenceLinks() {
     if(ref) ref.classList.remove('ref-highlight');
   }
 }
-function toggleCard(header) {
-  const card = header.parentElement;
-  card.classList.toggle("collapsed");
-  // міняй текст/іконку кнопки (− ↔ +)
-  const btn = header.querySelector('.collapse-btn');
-  if(card.classList.contains('collapsed')) btn.textContent = '+';
-  else btn.textContent = '−';
+
+// Open parent card if closed
+function openParentCardIfClosed(elementInside) {
+  if(!elementInside) return;
+  const parentCard = elementInside.closest('.task-card1');
+  if(!parentCard) return;
+  if(parentCard.classList.contains('collapsed')) {
+    parentCard.classList.remove('collapsed');
+    const btn = parentCard.querySelector('.collapse-btn');
+    if(btn) btn.textContent = '−';
+  }
 }
 
+// Toggle collapse
+function toggleCard(header) {
+  const card = header.closest ? header.closest('.task-card1') : (header.parentElement || null);
+  if(!card) return;
+  card.classList.toggle("collapsed");
+  let headerEl = header;
+  if(!headerEl.classList || !headerEl.classList.contains('card-header')) {
+    headerEl = card.querySelector('.card-header') || headerEl;
+  }
+  const btn = headerEl ? headerEl.querySelector('.collapse-btn') : null;
+  if(btn) {
+    btn.textContent = card.classList.contains('collapsed') ? '+' : '−';
+  }
+}
+
+// Show preview and navigate
 function showPreview(taskName) {
-  // Вставляє «preview» з TaskX.html у Home
   const fragmentId = "preview-" + taskName;
   const fragmentEl = document.getElementById(fragmentId);
-  if(!fragmentEl) return;
-
-  // Витягуємо перший абзац/заголовок з tasks[taskName]
-  let htmlFrag = '';
-  try {
-    const temp = document.createElement('div');
-    temp.innerHTML = tasks[taskName] || '';
-    // Витягнути перший абзац і заголовок (або кастомізуй тут!)
-    const h1 = temp.querySelector('h1');
-    const p = temp.querySelector('p');
-    htmlFrag = '';
-    if(h1) htmlFrag += '<b>'+h1.textContent+'</b><br>';
-    if(p) htmlFrag += p.textContent;
-  } catch(e) {}
-  fragmentEl.innerHTML = htmlFrag ? htmlFrag : 'Preview unavailable';
-
-  // SPA: перейди на taskX
+  if(fragmentEl) {
+    let htmlFrag = '';
+    try {
+      const temp = document.createElement('div');
+      temp.innerHTML = tasks[taskName] || '';
+      const h1 = temp.querySelector('h1');
+      const p = temp.querySelector('p');
+      htmlFrag = '';
+      if(h1) htmlFrag += '<b>'+h1.textContent+'</b><br>';
+      if(p) htmlFrag += p.textContent;
+    } catch(e) {}
+    fragmentEl.innerHTML = htmlFrag ? htmlFrag : 'Preview unavailable';
+  }
   location.hash = '#' + taskName;
 }
+
+/* APPEND: Adjust floating logo so it doesn't overlap the footer */
+(function() {
+  const logo = document.querySelector('.floating-logo');
+  const footer = document.querySelector('.gh-footer');
+  if (!logo || !footer) return;
+  const margin = 18; // default margin from bottom
+
+  function updateLogoPosition() {
+    const footerRect = footer.getBoundingClientRect();
+    const overlap = Math.max(0, window.innerHeight - footerRect.top);
+    if (overlap > 0) {
+      logo.style.bottom = (overlap + margin) + 'px';
+    } else {
+      logo.style.bottom = margin + 'px';
+    }
+  }
+
+  let rafId = null;
+  function scheduleUpdate() {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      updateLogoPosition();
+      rafId = null;
+    });
+  }
+
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
+  window.addEventListener('resize', scheduleUpdate);
+  window.addEventListener('load', scheduleUpdate);
+
+  scheduleUpdate();
+})();

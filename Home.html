@@ -1,50 +1,68 @@
 <div class="task-card">
   <h1>Home Page</h1>
   <p>
-    Welcome to E-Portfolio Yaroslav Tsyrul 2511421<br>
-    The main objectives of the project are summarized here. <br>
+    Welcome to E-Portfolio <b>Yaroslav Tsyrul 2511421</b>
+    <br>
+    The main objectives of the project are summarized here. 
+    <br>
     Select the desired task in the top navigation.
   </p>
 
   <div class="task-previews-list">
     <!-- Task 1 -->
-      <a href="#task1" class="preview-card" onclick="showPreview('task1');return false;">
-    <div class="preview-card-imgWrap">
-      <img src="images/Task1.jpg" alt="Task 1" class="preview-card-img">
-    </div>
-    <div class="preview-card-content">
-      <h3>Task 1: Summary & Reflection</h3>
-      <div class="preview-fragment" id="preview-task1"></div>
-    </div>
-  </a>
-    <!-- Task 2 -->
-    <a href="#task2" class="preview-card" onclick="showPreview('task2');return false;">
+    <a href="#task1" class="preview-card" onclick="showPreview('task1'); return false;" data-task="task1">
       <div class="preview-card-imgWrap">
-        <img src="images/task2.png" alt="Task 2" class="preview-card-img">
+        <img src="images/Task1.jpg"
+             srcset="images/Task1.jpg 2x, images/Task1.jpg 1x"
+             alt="Task 1 preview"
+             class="preview-card-img" loading="lazy">
       </div>
       <div class="preview-card-content">
-        <h3>Task 2: Mind Map & Poster</h3>
+        <h3>Task 1: Summary & Reflection</h3>
+        <div class="preview-fragment" id="preview-task1">In today’s fast-evolving academic and professional environments, cultivating essential skills is crucial for achieving success.</div>
+      </div>
+    </a>
+
+    <!-- Task 2 -->
+    <a href="#task2" class="preview-card" onclick="showPreview('task2'); return false;" data-task="task2">
+      <div class="preview-card-imgWrap">
+        <img src="images/task2.png"
+            srcset="images/task2.png 2x, images/task2.png 1x"
+            alt="Task 2 preview"
+            class="preview-card-img" loading="lazy">
+      </div>
+      <div class="preview-card-content">
+        <h3>Task 2: Collaborative Mind Map and Individual Poster</h3>
         <div class="preview-fragment" id="preview-task2"></div>
       </div>
     </a>
-    <!--Task 3-->
-    <a href="#task1" class="preview-card" onclick="showPreview('task1');return false;">
+
+    <!-- Task 3 -->
+    <a href="#task3" class="preview-card" onclick="showPreview('task3'); return false;" data-task="task3">
       <div class="preview-card-imgWrap">
-        <img src="images/task1.png" alt="Task 1" class="preview-card-img">
+        <img src="images/refworks.png"
+            srcset="images/refworks.png 2x, images/refworks.png 1x"
+            alt="Task 3 preview"
+            class="preview-card-img" loading="lazy">
       </div>
       <div class="preview-card-content">
         <h3>Task 3: Virtual Collaboration and RefWorks</h3>
-        <div class="preview-fragment" id="preview-task1"></div>
+        <div class="preview-fragment" id="preview-task3">Effective virtual collaboration demands a deliberate effort to address common team issues, especially those related to commitment and accountability</div>
       </div>
     </a>
-    <!--Task 4-->
-    <a href="#task1" class="preview-card" onclick="showPreview('task1');return false;">
+
+    <!-- Task 4 -->
+    <a href="#task4" class="preview-card" onclick="showPreview('task4'); return false;" data-task="task4">
       <div class="preview-card-imgWrap">
-        <img src="images/task4.png" alt="Task 1" class="preview-card-img">
+        <img src="images/task4.png"
+            srcset="images/task4.png 2x, images/task4.png 1x"
+            alt="Task 4 preview"
+            class="preview-card-img" loading="lazy">
       </div>
       <div class="preview-card-content">
         <h3>Task 4: E-Portfolio Creation and Review</h3>
-        <div class="preview-fragment" id="preview-task1"></div>
+        <div class="preview-fragment" id="preview-task4">Короткий фрагмент тексту або перший абзац зі сторінки...</div>
       </div>
     </a>
+  </div>
 </div>

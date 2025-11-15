@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>E-Portfolio</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="style.css">
+  <!-- optional favicon using the same header icon -->
+  <link rel="icon" type="image/png" href="images/header-icon.png">
 </head>
 <body>
   <header class="gh-header">
     <div class="gh-header-inner">
-      <span class="gh-logo" id="home-link">E-Portfolio</span>
+      <!-- Replaced the plain span with an icon + text anchor.
+           Keeps id="home-link" so main.js behaviour doesn't change. -->
+      <a id="home-link" class="gh-logo" href="#home" title="Home">
+        <img src="images/header-icon.png" alt="Site logo" class="gh-logo-img">
+        <span class="gh-logo-text">E-Portfolio</span>
+      </a>
+
       <nav>
         <a href="#home" id="navHome">Home</a>
         <a href="#task1" id="nav1">Task 1</a>
@@ -19,12 +27,22 @@
       </nav>
     </div>
   </header>
+
   <main>
     <div id="app"></div>
   </main>
+
   <footer class="gh-footer">
     <p>&copy; 2025 Yaroslav Tsyrul</p>
   </footer>
+
+  <!-- Floating left-corner logo (unchanged) -->
+  <div class="floating-logo" aria-hidden="false" role="img" title="University of Wales Trinity Saint David">
+    <a href="https://www.uwtsd.ac.uk" target="_blank" rel="noopener">
+      <img src="images/uwtsd-logo.png" alt="University of Wales Trinity Saint David logo">
+    </a>
+  </div>
+
   <script src="main.js"></script>
 </body>
 </html>

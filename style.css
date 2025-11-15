@@ -1,3 +1,4 @@
+/* base */
 html, body { height: 100%; margin: 0; padding: 0; }
 body {
   min-height: 100vh;
@@ -8,6 +9,7 @@ body {
   font-family: system-ui, sans-serif;
 }
 
+/* Header */
 .gh-header {
   background: #24292f;
   color: #fff;
@@ -25,12 +27,37 @@ body {
   height: 60px;
   justify-content: space-between;
 }
+
+/* NEW: logo with icon + text (replaces previous .gh-logo text-only rule) */
 .gh-logo {
-  font-weight: 700;
-  font-size: 1.35rem;
-  letter-spacing: -.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
+  line-height: 1;
+  user-select: none;
+  padding: 6px 0;
 }
+.gh-logo-img {
+  display: block;
+  width: 34px;
+  height: 34px;
+  object-fit: cover;   /* use 'contain' if you want the whole image visible */
+  border-radius: 6px;  /* change to 50% for circular icon */
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.gh-logo-text {
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: #ffffff;
+  white-space: nowrap;
+  transform: translateY(1px); /* small optical nudge for alignment */
+}
+
+/* Nav */
 nav {
   display: flex;
   gap: 20px;
@@ -63,19 +90,22 @@ nav a:hover::after {
   to { width:100% }
 }
 
+/* Main */
 main { max-width: 900px; margin: 32px auto; padding: 0 16px; flex: 1; }
 .task-card {
   background: #ffffff;
-  border: 1px solid #000000;
+  border: 1px solid rgba(0,0,0,0.05);
   border-radius: 6px;
   box-shadow: 0 4px 16px #24292f09;
   padding: 32px;
   margin-bottom: 42px;
   margin-top: 20px;
 }
-h1 { font-size: 15 ; font-weight: 700; margin-top: 0; color: #000000; }
-h2 { margin-top: 1.7em; margin-bottom: 0.4em; font-size: 1.3em; color:#000000; font-weight: 600;}
-h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1em;}
+h1 { font-size: 1.4rem; font-weight: 700; margin-top: 0; color: #000000; }
+h2 { margin-top: 1.7em; margin-bottom: 0.4em; font-size: 1.2rem; color:#000000; font-weight: 600;}
+h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.05rem;}
+
+/* Skills table */
 .skills-table {
   border-collapse: collapse;
   margin: 24px 0;
@@ -94,9 +124,8 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1em;}
   color: #2d3a4e;
   font-weight: 600;
 }
-.skills-table td {
-  background: #fff;
-}
+
+/* Reference link and highlight */
 .ref-link {
   text-decoration: none;
   color: #0074D9;
@@ -105,13 +134,13 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1em;}
   padding: 0 2px;
   border-radius: 3px;
 }
-.ref-link:focus { outline: none; }
 .ref-highlight {
   background: #fff9d6 !important;
   box-shadow: 0 0 0 2px #ffe27a;
   transition: background .18s, box-shadow .18s;
 }
 
+/* Footer */
 .gh-footer {
   background: #24292f;
   color: #fff;
@@ -124,21 +153,16 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1em;}
 }
 .gh-footer p { margin: 0; }
 
-@media (max-width: 700px) {
-  main, .gh-header-inner { padding: 8px; max-width: 100%; }
-  .task-card { padding: 14px; }
-  .gh-logo { font-size: 1.07rem; }
-  .gh-footer { font-size: 0.97rem; padding: 12px 0 8px 0; }
-}
+/* PDF button */
 .pdf-button {
   display: inline-block;
-  background: #ff0000;
+  background: #ef4444;
   color: #fff;
   font-weight: 600;
   padding: 10px 24px;
   border-radius: 6px;
   text-decoration: none;
-  box-shadow: 0 2px 8px #0074D940;
+  box-shadow: 0 2px 8px rgba(91, 239, 68, 0.25);
   transition: background .15s;
   margin-bottom: 22px;
   margin-top: 8px;
@@ -146,118 +170,91 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1em;}
   border: none;
 }
 .pdf-button:hover, .pdf-button:focus {
-  background: #00ff1a;
-  color: #fff;
-  text-decoration: underline;
+  background: #62ff00;
 }
+
+/* Collapsible card used in tasks */
 .task-card1 {
   background: #ffffff;
-  border: 1px solid #000000;
+  border: 1px solid rgba(0,0,0,0.06);
   border-radius: 6px;
   box-shadow: 0 4px 16px #24292f09;
-  padding: 32px;
+  padding: 0;
   margin-bottom: 15px;
-  margin-top: 0%;
 }
 .card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #ffffff;
-  padding: 22px 32px 0 32px;
+  padding: 22px 32px;
   cursor: pointer;
-  ;
 }
-
 .card-header h1,
 .card-header h2,
 .card-header h3 {
   margin: 0;
   font-size: 1.12em;
 }
-
 .collapse-btn {
   background: #0074D9;
   color: #fff;
   border: none;
   border-radius: 50%;
   width: 32px; height: 32px;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: bold;
   cursor: pointer;
-  transition: background .17s;
-}
-.collapse-btn:hover {
-  background: #005fa3;
 }
 .card-content {
-  padding: 0 32px 22px 32px;
+  padding: 22px 32px 22px 32px;
   animation: fadeIn .35s;
 }
-
-.task-card1.collapsed .card-content {
-  display: none;
-}
-
-.task-card1.collapsed .collapse-btn {
-  transform: rotate(180deg);
-}
-
+.task-card1.collapsed .card-content { display: none; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-
-
+/* Previews on Home */
 .task-previews-list {
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  margin: 32px 0;
+  gap: 24px;
+  margin: 24px 0;
 }
 .preview-card {
   display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  background: #f7f7fa;
-  border-radius: 18px;
-  box-shadow: 0 2px 16px #24292f10;
-  text-decoration: none;
-  transition: box-shadow .18s, background .18s;
-  padding: 14px;
-  cursor: pointer;
-  border: 1px solid #d0d7de;
-  position: relative;
-  min-height: 140px;
-}
-.preview-card:hover, .preview-card:focus {
+  gap: 20px;
+  align-items: center;
   background: #fff;
-  box-shadow: 0 6px 20px #24292f22;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  text-decoration: none;
+  color: inherit;
+  min-height: 120px;
 }
-
 .preview-card-imgWrap {
-  flex: 0 0 188px;
-  height: 140px;
+  flex: 0 0 160px;
+  height: 90px;
   overflow: hidden;
-  border-radius: 12px;
-  background: #eaeaf0;
+  border-radius: 10px;
+  background: #eaeaea;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .preview-card-img {
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  display: block;
+  border-radius: 8px;
 }
-
 .preview-card-content {
-  flex: 1; 
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
 }
-
 .preview-fragment {
   color: #333;
   margin-top: 10px;
@@ -267,4 +264,66 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1em;}
   max-height: 66px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* RefWorks gallery */
+.refworks-gallery { display:flex; gap:14px; flex-wrap:wrap; margin-top:8px; }
+.refworks-gallery figure { margin:0; width:240px; }
+.refworks-gallery img { width:100%; height:150px; object-fit:cover; border-radius:8px; border:1px solid #e6e6e6; }
+
+/* Lightbox (modal) styles (optional) */
+.lb-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 20px;
+}
+.lb-content { position: relative; max-width: 1200px; width: 100%; max-height: 92vh; display:flex; align-items:center; justify-content:center; }
+.lb-img { max-width:100%; max-height:92vh; object-fit:contain; border-radius:6px; box-shadow:0 12px 40px rgba(0,0,0,0.6); background:#fff; }
+.lb-caption { margin-top:12px; color:#fff; font-size:0.95rem; text-align:center; }
+
+/* Floating logo in bottom-left corner */
+.floating-logo {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 2200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.96);
+  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  transition: transform .14s ease, opacity .14s ease, bottom .16s ease;
+  opacity: 0.98;
+}
+.floating-logo img {
+  display: block;
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+@media (max-width: 640px) {
+  .floating-logo { left: 10px; bottom: 10px; padding: 4px; }
+  .floating-logo img { width: 110px; }
+}
+@media (max-width: 420px) {
+  .floating-logo img { width: 90px; }
+}
+
+/* Responsive small adjustments */
+@media (max-width: 700px) {
+  main, .gh-header-inner { padding: 8px; max-width: 100%; }
+  .task-card { padding: 14px; }
+  .gh-logo-text { display: none; }
+  .gh-logo { font-size: 1.07rem; }
+  .gh-footer { font-size: 0.97rem; padding: 12px 0 8px 0; }
+  .preview-card { flex-direction: column; align-items: stretch; min-height: auto; }
+  .preview-card-imgWrap { width: 100%; height: 160px; flex: 0 0 auto; }
 }

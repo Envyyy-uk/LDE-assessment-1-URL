@@ -1,31 +1,81 @@
-<div class="task-card1 collapsed" id="references-block">
-  <div class="card-header" onclick="toggleCard(this)">
-    <h2>References</h2>
-    <button class="collapse-btn">+</button>
-  </div>
-  <div class="card-content">
-    <ol start="5">
-      <li id="ref5">...</li>
-      <li id="ref6">...</li>
-      <!-- і так далі -->
-    </ol>
-  </div>
-</div>
-
-
-
-
-        <div class="task-card1">
-          <div class="card-header" onclick="toggleCard(this)">
-            <h2>References</h2>
-          <button class="collapse-btn">−</button>
+<section>
+  <div>
+    <div class="task-card1">
+      <div class="card-header" onclick="toggleCard(this)">
+        <h1>Task 4: E-Portfolio Illustrative Review</h1>
+        <button class="collapse-btn">−</button>
       </div>
       <div class="card-content">
-              <ol start="5">
-                <li id="ref5">Maria Ross, "Culture of empathy: how to make empathy a corporate value and why it is necessary," Forbes Ukraine, Oct. 30, 2021. [Online]. Available: <a href="https://forbes.ua/lifestyle/kultura-soperezhivaniya-kak-sdelat-empatii-korporativnoy-tsennostyu-i-zachem-eto-nuzhno-30102021-2685" target="_blank">https://forbes.ua/lifestyle/kultura-soperezhivaniya-kak-sdelat-empatii-korporativnoy-tsennostyu-i-zachem-eto-nuzhno-30102021-2685</a></li>
-                <li id="ref6">Breus Julia, "Emotional Intelligence as a Component of the Management Potential of a Person," elibrary.kubg.edu.ua, 2012. [Online]. Available: <a href="https://elibrary.kubg.edu.ua/id/eprint/22/1/Y_Breus_AMY.pdf" target="_blank">https://elibrary.kubg.edu.ua/id/eprint/22/1/Y_Breus_AMY.pdf</a></li>
-                <li id="ref7">M. Hoegl and H.-G. Gemuenden, "Teamwork quality and the success of innovative projects: A theoretical concept and empirical evidence," Organisation Science, vol. 12, no. 4, pp. 435–449, Aug. 2001.</li>
-                <li id="ref8">B. Tracy, Eat That Frog! 21 Great Ways to Stop Procrastinating and Get More Done in Less Time, 3rd ed. Oakland, CA: Berrett-Koehler Publishers, 2017.</li>
-              </ol>
-          </div>
-      
+        <h2>Tool Choice: Custom Site (HTML/CSS/JS)</h2>
+
+        <p>
+          To create this e-portfolio, I chose to build my own website from scratch using HTML, CSS, and JavaScript, rather than using a builder platform like Wix or Google Sites.
+        </p>
+
+        <h3>Why I chose this approach</h3>
+        <ul>
+          <li><strong>Complete Design Control:</strong> Building from scratch gave me absolute control over every aspect of the visual design and structure, allowing me to create a clean, professional, and unique look (see <code>style.css</code>).</li>
+          <li><strong>Demonstration of Technical Skills:</strong> Since my field of study is technology-related, building the site demonstrates practical web development skills — a useful artifact for the portfolio itself.</li>
+          <li><strong>Speed and Functionality (SPA):</strong> I implemented the site as a Single Page Application. The navigation is handled in <code>main.js</code>, which dynamically loads <code>Home.html</code>, <code>Task1.html</code>, etc., into the main container so the page does not fully reload when switching sections. This results in fast, fluid navigation and a more app-like experience.</li>
+        </ul>
+
+        <h3>Implementation details</h3>
+        <p>
+          Key files and responsibilities:
+        </p>
+        <ol>
+          <li><code>index.html</code> — root shell and navigation (header, main #app, footer).</li>
+          <li><code>style.css</code> — global styles, previews, task-card styling, responsive rules and the lightbox CSS (if used).</li>
+          <li><code>main.js</code> — SPA loader, preview population, reference link handlers, collapse/toggle logic, and the lightbox JS (if enabled).</li>
+          <li><code>Home.html, Task1.html, Task2.html, Task3.html, Task4.html</code> — content fragments dynamically loaded into <code>#app</code>.</li>
+        </ol>
+
+        <h3>Conclusion</h3>
+        <p>
+          Building the e-portfolio from scratch using HTML/CSS/JS fulfilled the assignment requirements and produced a polished, fast, and extensible portfolio site.
+        </p>
+      </div>
+    </div>
+
+    <!-- Evidence: exactly four screenshots (one per page) arranged like the example -->
+    <div class="task-card1">
+      <div class="card-header" onclick="toggleCard(this)">
+        <h2>Evidence: Screenshots & Notes</h2>
+        <button class="collapse-btn">−</button>
+      </div>
+      <div class="card-content">
+        <p>Below are four screenshots — one for each main page.</p>
+
+        <div class="refworks-gallery" aria-label="Four page screenshots" style="display:flex;flex-wrap:wrap;gap:24px;">
+          <figure style="width:48%;margin:0;">
+            <a href="images/home-screenshot.png" data-caption="Home page — task previews" aria-label="Open Home screenshot">
+              <img src="images/home-screenshot.png" alt="Home screenshot" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:1px solid #e6e6e6;">
+            </a>
+            <figcaption style="color:#6b7280;margin-top:10px;font-size:0.98rem;">Home page — task previews</figcaption>
+          </figure>
+
+          <figure style="width:48%;margin:0;">
+            <a href="images/task1-screenshot.png" data-caption="Task 1 — summary & reflection" aria-label="Open Task1 screenshot">
+              <img src="images/task1-screenshot.png" alt="Task1 screenshot" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:1px solid #e6e6e6;">
+            </a>
+            <figcaption style="color:#6b7280;margin-top:10px;font-size:0.98rem;">Task 1 — summary & reflection</figcaption>
+          </figure>
+
+          <figure style="width:48%;margin:0;">
+            <a href="images/task2-screenshot.png" data-caption="Task 2 — mind map & poster" aria-label="Open Task2 screenshot">
+              <img src="images/task2-screenshot.png" alt="Task2 screenshot" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:1px solid #e6e6e6;">
+            </a>
+            <figcaption style="color:#6b7280;margin-top:10px;font-size:0.98rem;">Task 2 — mind map & poster</figcaption>
+          </figure>
+
+          <figure style="width:48%;margin:0;">
+            <a href="images/task3-screenshot.png" data-caption="Task 3 — RefWorks & report" aria-label="Open Task3 screenshot">
+              <img src="images/task3-screenshot.png" alt="Task3 screenshot" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:1px solid #e6e6e6;">
+            </a>
+            <figcaption style="color:#6b7280;margin-top:10px;font-size:0.98rem;">Task 3 — RefWorks & report</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
