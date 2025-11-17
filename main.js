@@ -32,6 +32,7 @@ function renderTask(page) {
   if(page==="task3") document.getElementById("nav3")?.classList.add("active");
   if(page==="task4") document.getElementById("nav4")?.classList.add("active");
   activateReferenceLinks();
+  initializeLightbox(); // Initialize lightbox after each page render
 }
 
 // Hash change handler
@@ -165,3 +166,87 @@ function showPreview(taskName) {
 
   scheduleUpdate();
 })();
+
+/* ========== THEME TOGGLE (Added) ========== */
+// Initialize theme from localStorage or default to light
+(function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.body.setAttribute('data-theme', savedTheme);
+})();
+
+// Theme toggle button handler
+document.addEventListener('DOMContentLoaded', function() {
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', function() {
+      const currentTheme = document.body.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  }
+});
+
+/* ========== LIGHTBOX FUNCTIONALITY (Added for Gallery) ========== */
+function initializeLightbox() {
+  // Remove existing lightbox overlay if any
+  const existingOverlay = document.getElementById('lightbox-overlay');
+  if (existingOverlay) {
+    existingOverlay.remove();
+  }
+
+  // Create lightbox overlay
+  const overlay = document.createElement('div');
+  overlay.id = 'lightbox-overlay';
+  overlay.className = 'lb-overlay';
+  overlay.innerHTML = `
+    <div class="lb-content">
+      <span class="lb-close" onclick="closeLightbox()">&times;</span>
+      <img class="lb-img" src="" alt="">
+      <div class="lb-caption"></div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  // Close lightbox when clicking outside the image
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      closeLightbox();
+    }
+  });
+
+  // Close lightbox on Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+}
+
+function openLightbox(figureElement) {
+  const img = figureElement.querySelector('img');
+  if (!img) return;
+  
+  const overlay = document.getElementById('lightbox-overlay');
+  const lbImg = overlay.querySelector('.lb-img');
+  const lbCaption = overlay.querySelector('.lb-caption');
+  
+  lbImg.src = img.src;
+  lbImg.alt = img.alt;
+  lbCaption.textContent = img.getAttribute('data-caption') || img.alt;
+  
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden'; // Prevent scrolling
+}
+
+function closeLightbox() {
+  const overlay = document.getElementById('lightbox-overlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+    document.body.style.overflow = ''; // Re-enable scrolling
+  }
+}
+
+// Make functions globally accessible
+window.openLightbox = openLightbox;
+window.closeLightbox = closeLightbox;
