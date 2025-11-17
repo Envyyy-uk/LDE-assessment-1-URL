@@ -111,7 +111,7 @@ nav a {
   font-weight: 500;
   padding: 5px 0;
   position: relative;
-  transition: color .2s;
+  transition: color .2s, font-size .2s;
 }
 nav a.active,
 nav a:hover {
@@ -486,7 +486,7 @@ body.dark .floating-logo {
   opacity: 1;
 }
 
-/* NEW: Lightbox Navigation Buttons */
+/* Lightbox Navigation Buttons */
 .lightbox-nav {
   position: absolute;
   top: 50%;
@@ -518,25 +518,57 @@ body.dark .floating-logo {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* Responsive small adjustments */
+/* === RESPONSIVE STYLES === */
+
+/* For tablets and small desktops */
+@media (max-width: 900px) {
+  main {
+    margin: 24px auto;
+  }
+}
+
+/* For mobile devices */
 @media (max-width: 700px) {
   main, .gh-header-inner { padding: 0 16px; max-width: 100%; }
   .task-card { padding: 24px; }
   .card-content { padding: 0 24px 22px 24px; }
   .card-header { padding: 16px 24px; }
   .gh-footer { font-size: 0.97rem; padding: 12px 0 8px 0; }
+  
   .preview-card { flex-direction: column; align-items: stretch; min-height: auto; }
   .preview-card-imgWrap { width: 100%; height: 160px; flex: 0 0 auto; }
+  
   .screenshot-gallery figure, .refworks-gallery figure { width: 100%; }
+  
   .gh-logo-text {
     display: none;
   }
-}
-
-@media (max-width: 640px) {
+  
   .floating-logo { left: 10px; bottom: 10px; padding: 4px; }
   .floating-logo img { width: 110px; }
+
+  /* Responsive table wrapper */
+  .table-responsive-wrapper {
+    overflow-x: auto;
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .skills-table {
+    min-width: 500px; /* Force table to have minimum width to enable scrolling */
+  }
 }
-@media (max-width: 420px) {
-  .floating-logo img { width: 90px; }
+
+/* For very narrow mobile screens */
+@media (max-width: 380px) {
+  nav {
+    gap: 8px; /* Reduce gap between nav items */
+  }
+  nav a {
+    font-size: 0.9rem; /* Slightly smaller font for nav links */
+  }
+  #theme-toggle {
+    margin-left: 5px;
+  }
 }
