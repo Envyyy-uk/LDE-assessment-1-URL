@@ -40,15 +40,34 @@ body.dark {
 }
 
 
-html, body { height: 100%; margin: 0; padding: 0; }
+html, body { height: 100%; margin: 0; padding: 0; scroll-behavior: smooth; }
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: var(--bg-color);
   color: var(--text-color);
-  font-family: system-ui, sans-serif;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 300;
   transition: background .2s, color .2s;
+}
+
+/* NEW: Accessibility Skip Link */
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  background: var(--link-color);
+  color: white;
+  padding: 10px 15px;
+  z-index: 4000;
+  transition: top 0.3s;
+  border-bottom-right-radius: 5px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 0;
 }
 
 /* Header */
@@ -92,7 +111,7 @@ body {
   opacity: 0.8;
 }
 .gh-logo-text {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.05rem;
   color: var(--header-text);
   white-space: nowrap;
@@ -161,6 +180,15 @@ body.dark #theme-toggle:hover {
 
 /* Main */
 main { max-width: 900px; margin: 32px auto; padding: 0 16px; flex: 1; }
+
+/* NEW: Loader */
+#loader {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.1rem;
+    color: var(--text-muted-color);
+}
+
 .task-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -170,10 +198,13 @@ main { max-width: 900px; margin: 32px auto; padding: 0 16px; flex: 1; }
   margin-bottom: 42px;
   margin-top: 20px;
 }
-h1, h2, h3 { color: var(--text-color); font-weight: 600; }
-h1 { font-size: 1.4rem; font-weight: 700; margin-top: 0; }
-h2 { margin-top: 1.7em; margin-bottom: 0.4em; font-size: 1.2rem; }
-h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.05rem;}
+h1, h2, h3 { 
+  color: var(--text-color); 
+  font-weight: 600;
+}
+h1 { font-size: 1.5rem; font-weight: 700; margin-top: 0; }
+h2 { margin-top: 1.7em; margin-bottom: 0.4em; font-size: 1.25rem; }
+h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.1rem;}
 
 /* Skills table */
 .skills-table {
@@ -192,14 +223,14 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.05rem;}
 .skills-table th {
   background: var(--table-header-bg);
   color: var(--text-color);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* Reference link and highlight */
 .ref-link {
   text-decoration: none;
   color: var(--link-color);
-  font-weight: bold;
+  font-weight: 500;
   cursor: pointer;
   padding: 0 2px;
   border-radius: 3px;
@@ -210,25 +241,58 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.05rem;}
   transition: background .18s, box-shadow .18s;
 }
 
-/* Footer */
+/* Footer - UPDATED */
 .gh-footer {
   background: var(--footer-bg);
   color: var(--footer-text);
-  text-align: center;
-  padding: 16px 0 10px 0;
-  font-size: 1rem;
-  letter-spacing: 0.04rem;
+  padding: 24px 0;
+  font-size: 0.9rem;
   border-top: 1px solid var(--card-border);
-  margin-top: 0;
 }
-.gh-footer p { margin: 0; }
+.footer-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+}
+.gh-footer p { 
+  margin: 0; 
+  color: var(--text-muted-color);
+  justify-self: center;
+}
+body.dark .gh-footer p {
+  color: var(--text-muted-color);
+}
+.footer-socials {
+  display: flex;
+  gap: 16px;
+  justify-self: end;
+}
+.footer-socials a {
+  color: var(--text-muted-color);
+  display: inline-block;
+  line-height: 1;
+}
+.footer-socials .footer-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  transition: color 0.2s;
+}
+.footer-socials a:hover {
+  color: var(--link-color);
+}
+
 
 /* PDF button */
 .pdf-button {
   display: inline-block;
   background: #ef4444;
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
   padding: 10px 24px;
   border-radius: 6px;
   text-decoration: none;
@@ -282,7 +346,10 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.05rem;}
   animation: fadeIn .35s;
 }
 .task-card1.collapsed .card-content { display: none; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /* Previews on Home */
 .task-previews-list {
@@ -303,6 +370,14 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.05rem;}
   color: inherit;
   min-height: 120px;
   border: 1px solid var(--card-border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.preview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.09);
+}
+body.dark .preview-card:hover {
+    box-shadow: 0 10px 22px rgba(0,0,0,0.2);
 }
 .preview-card-imgWrap {
   flex: 0 0 160px;
@@ -330,12 +405,10 @@ h3 { margin-top: 1.2em; margin-bottom:0.3em; font-size:1.05rem;}
 .preview-fragment {
   color: var(--text-muted-color);
   margin-top: 10px;
-  font-size: 1rem;
-  line-height: 1.4;
+  font-size: 0.95rem;
+  line-height: 1.5;
   min-height: 56px;
-  max-height: 66px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 /* RefWorks gallery (Task 3) */
@@ -518,22 +591,129 @@ body.dark .floating-logo {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* === RESPONSIVE STYLES === */
+/* Scroll to Top button */
+#scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2200;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: opacity 0.3s, transform 0.3s;
+  opacity: 0;
+  transform: translateY(10px);
+}
+#scroll-to-top.visible {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+#scroll-to-top svg {
+  width: 24px;
+  height: 24px;
+}
 
-/* For tablets and small desktops */
+/* Hero Section Styles */
+.hero-section {
+  padding: 60px 0 40px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.hero-subtitle {
+  color: var(--link-color);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin: 10px 0 20px;
+  color: var(--text-color);
+  line-height: 1.2;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: var(--text-muted-color);
+  max-width: 600px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--link-color);
+  color: #fff;
+  border: 2px solid var(--link-color);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 2px solid var(--table-border);
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: var(--table-border);
+  margin: 40px 0;
+}
+
+/* === RESPONSIVE STYLES === */
 @media (max-width: 900px) {
   main {
     margin: 24px auto;
   }
 }
 
-/* For mobile devices */
 @media (max-width: 700px) {
-  main, .gh-header-inner { padding: 0 16px; max-width: 100%; }
+  main, .gh-header-inner, .footer-content { padding: 0 16px; max-width: 100%; }
   .task-card { padding: 24px; }
   .card-content { padding: 0 24px 22px 24px; }
   .card-header { padding: 16px 24px; }
-  .gh-footer { font-size: 0.97rem; padding: 12px 0 8px 0; }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 12px;
+  }
+  .gh-footer p { order: 2; }
+  .footer-socials { order: 1; justify-self: center; }
+  .footer-left-spacer { display: none; }
   
   .preview-card { flex-direction: column; align-items: stretch; min-height: auto; }
   .preview-card-imgWrap { width: 100%; height: 160px; flex: 0 0 auto; }
@@ -547,7 +727,6 @@ body.dark .floating-logo {
   .floating-logo { left: 10px; bottom: 10px; padding: 4px; }
   .floating-logo img { width: 110px; }
 
-  /* Responsive table wrapper */
   .table-responsive-wrapper {
     overflow-x: auto;
     margin-left: -24px;
@@ -556,17 +735,19 @@ body.dark .floating-logo {
     padding-right: 24px;
   }
   .skills-table {
-    min-width: 500px; /* Force table to have minimum width to enable scrolling */
+    min-width: 500px;
   }
+  
+  .hero-section h1 { font-size: 1.8rem; }
+  .hero-description { font-size: 1rem; padding: 0 10px; }
 }
 
-/* For very narrow mobile screens */
 @media (max-width: 380px) {
   nav {
-    gap: 8px; /* Reduce gap between nav items */
+    gap: 8px;
   }
   nav a {
-    font-size: 0.9rem; /* Slightly smaller font for nav links */
+    font-size: 0.9rem;
   }
   #theme-toggle {
     margin-left: 5px;
