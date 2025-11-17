@@ -1,5 +1,4 @@
 // SPA logic for 4 tasks + Home + reference highlight (final)
-// (unchanged — keeps behavior the same)
 
 const tasks = {
   "home": "",
@@ -31,7 +30,9 @@ function renderTask(page) {
   if(page==="task2") document.getElementById("nav2")?.classList.add("active");
   if(page==="task3") document.getElementById("nav3")?.classList.add("active");
   if(page==="task4") document.getElementById("nav4")?.classList.add("active");
+  
   activateReferenceLinks();
+  initLightbox(); // Initialize lightbox for any new content
 }
 
 // Hash change handler
@@ -53,7 +54,7 @@ window.addEventListener("hashchange", function() {
 // Initial render
 renderTask(getPage());
 
-// Home logo -> home (anchor still works because id="home-link" used)
+// Home logo -> home
 document.getElementById("home-link").onclick = function() { location.hash = "#home"; };
 
 // Reference highlight handlers
@@ -100,14 +101,10 @@ function openParentCardIfClosed(elementInside) {
 
 // Toggle collapse
 function toggleCard(header) {
-  const card = header.closest ? header.closest('.task-card1') : (header.parentElement || null);
+  const card = header.closest('.task-card1');
   if(!card) return;
   card.classList.toggle("collapsed");
-  let headerEl = header;
-  if(!headerEl.classList || !headerEl.classList.contains('card-header')) {
-    headerEl = card.querySelector('.card-header') || headerEl;
-  }
-  const btn = headerEl ? headerEl.querySelector('.collapse-btn') : null;
+  const btn = card.querySelector('.collapse-btn');
   if(btn) {
     btn.textContent = card.classList.contains('collapsed') ? '+' : '−';
   }
@@ -133,35 +130,121 @@ function showPreview(taskName) {
   location.hash = '#' + taskName;
 }
 
-/* APPEND: Adjust floating logo so it doesn't overlap the footer */
+/* APPEND: Adjust floating logo */
 (function() {
   const logo = document.querySelector('.floating-logo');
   const footer = document.querySelector('.gh-footer');
   if (!logo || !footer) return;
-  const margin = 18; // default margin from bottom
+  const margin = 18;
 
   function updateLogoPosition() {
     const footerRect = footer.getBoundingClientRect();
     const overlap = Math.max(0, window.innerHeight - footerRect.top);
-    if (overlap > 0) {
-      logo.style.bottom = (overlap + margin) + 'px';
-    } else {
-      logo.style.bottom = margin + 'px';
-    }
+    logo.style.bottom = (overlap > 0) ? `${overlap + margin}px` : `${margin}px`;
   }
 
-  let rafId = null;
-  function scheduleUpdate() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = requestAnimationFrame(() => {
-      updateLogoPosition();
-      rafId = null;
-    });
-  }
-
-  window.addEventListener('scroll', scheduleUpdate, { passive: true });
-  window.addEventListener('resize', scheduleUpdate);
-  window.addEventListener('load', scheduleUpdate);
-
-  scheduleUpdate();
+  window.addEventListener('scroll', updateLogoPosition, { passive: true });
+  window.addEventListener('resize', updateLogoPosition);
+  window.addEventListener('load', () => setTimeout(updateLogoPosition, 100));
 })();
+
+
+/* Light/Dark Theme Toggle */
+(function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark');
+    }
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark');
+        localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    });
+})();
+
+/* NEW / REWRITTEN: Lightbox for Galleries with Navigation */
+function initLightbox() {
+    const overlay = document.getElementById('lightbox-overlay');
+    if (!overlay) return;
+
+    const imgEl = document.getElementById('lightbox-img');
+    const captionEl = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    
+    let currentGalleryLinks = [];
+    let currentIndex = 0;
+
+    // Find all distinct galleries on the page
+    const galleries = document.querySelectorAll('.screenshot-gallery, .refworks-gallery');
+
+    galleries.forEach(gallery => {
+        const links = Array.from(gallery.querySelectorAll('a'));
+        
+        links.forEach((link, index) => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                currentGalleryLinks = links; // Set the context to the current gallery
+                openLightbox(index);
+            });
+        });
+    });
+
+    function openLightbox(index) {
+        currentIndex = index;
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        updateImage();
+    }
+
+    function updateImage() {
+        const link = currentGalleryLinks[currentIndex];
+        const imgSrc = link.href;
+        const captionText = link.dataset.caption || link.closest('figure')?.querySelector('figcaption')?.textContent || '';
+        
+        imgEl.src = imgSrc;
+        captionEl.textContent = captionText;
+
+        // Update button states
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === currentGalleryLinks.length - 1;
+    }
+
+    function showPrev() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateImage();
+        }
+    }
+
+    function showNext() {
+        if (currentIndex < currentGalleryLinks.length - 1) {
+            currentIndex++;
+            updateImage();
+        }
+    }
+
+    function closeLightbox() {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    // Event Listeners
+    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', showNext);
+    closeBtn.addEventListener('click', closeLightbox);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) { // Click on the background to close
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (overlay.style.display !== 'flex') return;
+        if (e.key === 'ArrowLeft') showPrev();
+        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'Escape') closeLightbox();
+    });
+}

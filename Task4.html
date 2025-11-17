@@ -25,8 +25,8 @@
         </p>
         <ol>
           <li><code>index.html</code> — root shell and navigation (header, main #app, footer).</li>
-          <li><code>style.css</code> — global styles, previews, task-card styling, responsive rules and the lightbox CSS (if used).</li>
-          <li><code>main.js</code> — SPA loader, preview population, reference link handlers, collapse/toggle logic, and the lightbox JS (if enabled).</li>
+          <li><code>style.css</code> — global styles, previews, task-card styling, responsive rules and the lightbox CSS.</li>
+          <li><code>main.js</code> — SPA loader, preview population, reference link handlers, collapse/toggle logic, and the lightbox JS.</li>
           <li><code>Home.html, Task1.html, Task2.html, Task3.html, Task4.html</code> — content fragments dynamically loaded into <code>#app</code>.</li>
         </ol>
 
@@ -37,42 +37,42 @@
       </div>
     </div>
 
-    <!-- Evidence: exactly four screenshots (one per page) arranged like the example -->
+    <!-- Evidence: New screenshot gallery with lightbox -->
     <div class="task-card1">
       <div class="card-header" onclick="toggleCard(this)">
         <h2>Evidence: Screenshots & Notes</h2>
         <button class="collapse-btn">−</button>
       </div>
       <div class="card-content">
-        <p>Below are four screenshots — one for each main page.</p>
+        <p>Below are four screenshots — one for each main page. Click any image to open it in a lightbox.</p>
 
-        <div class="refworks-gallery" aria-label="Four page screenshots" style="display:flex;flex-wrap:wrap;gap:24px;">
-          <figure style="width:48%;margin:0;">
+        <div class="screenshot-gallery" aria-label="Four page screenshots">
+          <figure>
             <a href="images/home-screenshot.png" data-caption="Home page — task previews" aria-label="Open Home screenshot">
-              <img src="images/home-screenshot.png" alt="Home screenshot" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:1px solid #e6e6e6;">
+              <img src="images/home-screenshot.png" alt="Home screenshot">
             </a>
-            <figcaption style="color:#6b7280;margin-top:10px;font-size:0.98rem;">Home page — task previews</figcaption>
+            <figcaption>Home page — task previews</figcaption>
           </figure>
 
-          <figure style="width:48%;margin:0;">
+          <figure>
             <a href="images/task1-screenshot.png" data-caption="Task 1 — summary & reflection" aria-label="Open Task1 screenshot">
-              <img src="images/task1-screenshot.png" alt="Task1 screenshot" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:1px solid #e6e6e6;">
+              <img src="images/task1-screenshot.png" alt="Task1 screenshot">
             </a>
-            <figcaption style="color:#6b7280;margin-top:10px;font-size:0.98rem;">Task 1 — summary & reflection</figcaption>
+            <figcaption>Task 1 — summary & reflection</figcaption>
           </figure>
 
-          <figure style="width:48%;margin:0;">
+          <figure>
             <a href="images/task2-screenshot.png" data-caption="Task 2 — mind map & poster" aria-label="Open Task2 screenshot">
-              <img src="images/task2-screenshot.png" alt="Task2 screenshot" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:1px solid #e6e6e6;">
+              <img src="images/task2-screenshot.png" alt="Task2 screenshot">
             </a>
-            <figcaption style="color:#6b7280;margin-top:10px;font-size:0.98rem;">Task 2 — mind map & poster</figcaption>
+            <figcaption>Task 2 — mind map & poster</figcaption>
           </figure>
 
-          <figure style="width:48%;margin:0;">
+          <figure>
             <a href="images/task3-screenshot.png" data-caption="Task 3 — RefWorks & report" aria-label="Open Task3 screenshot">
-              <img src="images/task3-screenshot.png" alt="Task3 screenshot" style="width:100%;height:220px;object-fit:cover;border-radius:8px;border:1px solid #e6e6e6;">
+              <img src="images/task3-screenshot.png" alt="Task3 screenshot">
             </a>
-            <figcaption style="color:#6b7280;margin-top:10px;font-size:0.98rem;">Task 3 — RefWorks & report</figcaption>
+            <figcaption>Task 3 — RefWorks & report</figcaption>
           </figure>
         </div>
       </div>
